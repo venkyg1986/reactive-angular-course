@@ -11,6 +11,7 @@ import { map } from "rxjs/operators";
 export class CoursesService {
   constructor(private http: HttpClient) {}
 
+  //stateless observable service method.
   loadAllCourses(): Observable<Course[]> {
     return this.http
       .get<Course[]>("/api/courses")
