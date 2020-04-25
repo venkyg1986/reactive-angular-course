@@ -18,6 +18,14 @@ import { CourseDialogComponent } from "../course-dialog/course-dialog.component"
 import { CoursesService } from "../services/courses.service";
 import { ThrowStmt } from "@angular/compiler";
 
+// Smart Component - knows about the service layer,knows where the data comes from,how to prepare the dervied observables that the view layer needs inorder to obtain necessary data.
+
+//Presentation component will be given the responsibility how to show the data, thats why we passed the observable to the presentational component "courses-card-list". This presentational component inturn doesnot have any information of service layer and how data is prepared using derived observables.
+
+//Thats why home component has very little information of html how the data is displayed and shown to the user.
+
+//so as a pattern, before implementing something just think of roles of smart and presentational components.
+
 @Component({
   selector: "home",
   templateUrl: "./home.component.html",
@@ -38,9 +46,8 @@ export class HomeComponent implements OnInit {
   //manual subscription and unsubscription.
 
   constructor(
-    private http: HttpClient,
-    private coursesService: CoursesService,
-    private dialog: MatDialog
+    //private http: HttpClient,
+    private coursesService: CoursesService // , // private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -74,15 +81,15 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  editCourse(course: Course) {
-    const dialogConfig = new MatDialogConfig();
+  // editCourse(course: Course) {
+  //   const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "400px";
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = "400px";
 
-    dialogConfig.data = course;
+  //   dialogConfig.data = course;
 
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
-  }
+  //   const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
+  // }
 }
