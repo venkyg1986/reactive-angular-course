@@ -7,6 +7,10 @@ export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
+  constructor() {
+    console.log("--- a loading service is created ---");
+  }
+
   showLoaderUntilCompleted<T>(obs$: Observable<T>): Observable<T> {
     //the benefit of this pattern is
     //for sure return of(null) will be called from UI component

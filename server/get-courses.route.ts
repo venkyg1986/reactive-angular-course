@@ -10,7 +10,7 @@ export function getAllCourses(req: Request, res: Response) {
 
   setTimeout(() => {
     res.status(200).json({ payload: Object.values(COURSES) });
-  }, 5000);
+  }, 1000);
 }
 
 export function getCourseById(req: Request, res: Response) {
