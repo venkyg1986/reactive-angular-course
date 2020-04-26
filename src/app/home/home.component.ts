@@ -17,6 +17,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { CourseDialogComponent } from "../course-dialog/course-dialog.component";
 import { CoursesService } from "../services/courses.service";
 import { ThrowStmt } from "@angular/compiler";
+import { LoadingService } from "../loading/loading.service";
 
 // Smart Component - knows about the service layer,knows where the data comes from,how to prepare the dervied observables that the view layer needs inorder to obtain necessary data.
 
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     //private http: HttpClient,
+    private loadingService: LoadingService,
     private coursesService: CoursesService // , // private dialog: MatDialog
   ) {}
 
