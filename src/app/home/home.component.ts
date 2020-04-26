@@ -80,19 +80,40 @@ export class HomeComponent implements OnInit {
   }
 
   reloadCourses() {
-    this.loadingService.loadingOn();
-    const courses$ = this.coursesService.loadAllCourses().pipe(
-      map((courses) => courses.sort(sortCoursesBySeqNo)),
-      finalize(() => this.loadingService.loadingOff())
+    //old loading way
+    // this.loadingService.loadingOn();
+    // const courses$ = this.coursesService.loadAllCourses().pipe(
+    //   map((courses) => courses.sort(sortCoursesBySeqNo)),
+    //   finalize(() => this.loadingService.loadingOff())
+    // );
+    // this.beginnerCourses$ = courses$.pipe(
+    //   map((courses) =>
+    //     courses.filter((course) => course.category === "BEGINNER")
+    //   )
+    // );
+
+    // this.advancedCourses$ = courses$.pipe(
+    //   map((courses) =>
+    //     courses.filter((course) => course.category === "ADVANCED")
+    //   )
+    // );
+
+    const courses$ = this.coursesService
+      .loadAllCourses()
+      .pipe(map((courses) => courses.sort(sortCoursesBySeqNo)));
+
+    // new loading way
+    const loadedCourses$ = this.loadingService.showLoaderUntilCompleted(
+      courses$
     );
 
-    this.beginnerCourses$ = courses$.pipe(
+    this.beginnerCourses$ = loadedCourses$.pipe(
       map((courses) =>
         courses.filter((course) => course.category === "BEGINNER")
       )
     );
 
-    this.advancedCourses$ = courses$.pipe(
+    this.advancedCourses$ = loadedCourses$.pipe(
       map((courses) =>
         courses.filter((course) => course.category === "ADVANCED")
       )
